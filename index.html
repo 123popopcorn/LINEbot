@@ -56,7 +56,7 @@
 
     $('form').submit(function( event ) {
       event.preventDefault();
-      $.post( 'https://script.google.com/macros/s/AKfycbwtouuX4Obv_J5UXbtaWr3ca1ozum5is59CGnkVl6650Y5x4AejJPstaUvaAASSqJ5-IQ/exec', $('form').serialize() ).done(function(response) {
+      $.post( 'https://script.google.com/macros/s/AKfycbyqzjezVdOB-ZzyGPfjJAjQOmpEA0_RYhlpWxZcHtzii5BOf-WaJ2ppbrALm-oLukIvzg/exec', $('form').serialize() ).done(function(response) {
     console.log('送信成功:', response);
   })
   .fail(function(error) {
