@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIFF Stripe Checkout</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
 </head>
 <body>
   <form class="w-75 mx-auto">
-    <p class="mt-3">PayPay送金リンク<br /><b>*パスコードなし</b><br /><b>リンクのみ</b></p>
+    <p class="mt-3">PayPay送金リンク</p>
     <div>
-        <input class="form-control w-100 mt-1" name="paypay_link" placeholder="https://pay.paypay.ne.jp/xxxxxxxxxx" required>
+        <input class="form-control w-100 mt-1" name="paypay_link" placeholder="https://pay.paypay.ne.jp/xxxxx" required>
     </div>
-    <p class="mt-3">XのID（任意）<br />*Xのアカウントがない場合や入力したくない場合は空欄で送信してください</p>
+    <p class="mt-3"><br>XのID（任意）</p>
     <div>
-        <input class="form-control w-100 mt-1" name="x_id", placeholder="@abcdefg">
+        <input class="form-control w-100 mt-1" name="x_id" placeholder="@xxxxx">
     </div>
-
+    <!-- 送信ボタンはJavaScriptで動的に追加されます -->
   </form>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -43,9 +43,21 @@
       $('form').append(`<input type="submit" class="mt-4 btn btn-primary" value="送信">`);
     })
 
-    $('form').submit(function( event ) {
+    $('form').submit(function(event) {
       event.preventDefault();
-      $.post( 'https://script.google.com/macros/s/AKfycbyTPsi3-msywBjgendygmMP8yrhA6wxcOSZOLtQTZMmHPkUwRO490ocfUpSjgNj7Gf7ng/exec', $('form').serialize() );
+      const $form = $(this);
+      // フォームを送信した後、送信ボタンを非活性にします
+      $form.find('input[type="submit"]').prop('disabled', true);
+
+      $.post('https://script.google.com/macros/s/AKfycbyTPsi3-msywBjgendygmMP8yrhA6wxcOSZOLtQTZMmHPkUwRO490ocfUpSjgNj7Gf7ng/exec', $form.serialize())
+        .done(function() {
+          alert('送信完了しました。');
+        })
+        .fail(function() {
+          alert('エラーが発生しました。もう一度お試しください。');
+          // エラー時は送信ボタンの非活性を解除
+          $form.find('input[type="submit"]').prop('disabled', false);
+        });
     });
   </script>
 </body>
