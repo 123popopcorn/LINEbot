@@ -10,26 +10,15 @@
 </head>
 <body>
   <form class="w-75 mx-auto">
-    <p class="mt-3">名前</p>
+    <p class="mt-3">PayPay送金リンク<br /><b>*パスコードなし</b><br /><b>リンクのみ</b></p>
     <div>
-        <input class="form-control w-100 mt-1" name="name" placeholder="" required>
+        <input class="form-control w-100 mt-1" name="paypay_link" placeholder="https://pay.paypay.ne.jp/xxxxxxxxxx" required>
     </div>
-    <p class="mt-3">腕立て</p>
+    <p class="mt-3">XのID（任意）<br />*Xのアカウントがない場合や入力したくない場合は空欄で送信してください</p>
     <div>
-        <input class="form-control w-100 mt-1" name="udetate" required>
+        <input class="form-control w-100 mt-1" name="x_id", placeholder="@abcdefg">
     </div>
-    <p class="mt-3">腹筋</p>
-    <div>
-        <input class="form-control w-100 mt-1" name="fukkin" required>
-    </div>
-    <p class="mt-3">背筋</p>
-    <div>
-        <input class="form-control w-100 mt-1" name="haikin" required>
-    </div>
-    <p class="mt-3">スクワット</p>
-    <div>
-        <input class="form-control w-100 mt-1" name="sukuwat" required>
-    </div>
+
   </form>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -56,12 +45,7 @@
 
     $('form').submit(function( event ) {
       event.preventDefault();
-      $.post( 'https://script.google.com/macros/s/AKfycbyqzjezVdOB-ZzyGPfjJAjQOmpEA0_RYhlpWxZcHtzii5BOf-WaJ2ppbrALm-oLukIvzg/exec', $('form').serialize() ).done(function(response) {
-    console.log('送信成功:', response);
-  })
-  .fail(function(error) {
-    console.error('送信失敗:', error);
-  });
+      $.post( 'https://script.google.com/macros/s/AKfycbwFTg_Ic8_k6sD11uePKvTCtkzAlxFgJcK1vn8hR2iXllPxHmrFmpgx5pVzNbKTDN-0TA/exec', $('form').serialize() );
     });
   </script>
 </body>
